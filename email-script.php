@@ -1,13 +1,11 @@
-<form action="https://api.web3forms.com/submit" method="POST">
 
-<input type="hidden" name="access_key" value="f63d3ace-1e97-403c-b622-d1251c33cf7d">
+Developers@Agileitexperts : a8fdf330-6bed-4ca8-bc66-fa2c76fb88a7
 
-<input type="text" name="name" required>
-<input type="email" name="email" required>
-<textarea name="message" required></textarea>
-<button type="submit">Submit Form</button>
+Admin@agileitexperts : fa7542bb-bbed-489a-bc39-6e4b97599ff8
 
-</form>
+Shanmugam: f63d3ace-1e97-403c-b622-d1251c33cf7d
+
+
 
 
 

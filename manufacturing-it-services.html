@@ -4,87 +4,24 @@
 <head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",(e=>{this.persisted=e.persisted})),window.addEventListener("DOMContentLoaded",(()=>{this._preconnect3rdParties()})),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){document.hidden?e._triggerListener():(this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler))}_removeUserInteractionListener(){this.triggerEvents.forEach((e=>window.removeEventListener(e,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"))}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick")}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))}))}_renameDOMAttribute(e,t,n){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(n,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{if(t.hasAttribute("src")){const n=new URL(t.src).origin;n!==location.origin&&e.push({src:n,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}})),e=[...new Map(e.map((e=>[JSON.stringify(e),e]))).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._replayClicks()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._littleBreath(),new Promise((t=>{const n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t());try{e.parentNode.replaceChild(n,e)}catch(e){t()}}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var n=document.createDocumentFragment();e.forEach((e=>{if(e.src){const i=document.createElement("link");i.href=e.src,i.rel=t,"preconnect"!==t&&(i.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),e.crossOrigin&&(i.crossOrigin=e.crossOrigin),n.appendChild(i)}})),document.head.appendChild(n)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),await this._littleBreath();const e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const s=document.createDocumentFragment();i.setStart(s,0),s.appendChild(i.createContextualFragment(t)),r.insertBefore(s,o)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((e=>setTimeout(e))):new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="profile" href="https://gmpg.org/xfn/11">
-    <link rel="dns-prefetch" href="//www.olark.com">
-    <link rel="dns-prefetch" href="//www.facebook.com">
-    <link rel="dns-prefetch" href="//marketingplatform.google.com">
-    <link rel="dns-prefetch" href="//www.google-analytics.com">
-    <link rel="dns-prefetch" href="//www.googletagmanager.com">
-    <link rel="dns-prefetch" href="//www.linkedin.com">
-    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+   
 
 	<!-- This site is optimized with the Yoast SEO plugin v19.0 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>Enabling Digital Advantage for Manufacturing Brands | InfyGlobe technologies</title>
 	<meta name="description" content="InfyGlobe helps manufacturing brands blend smart technology, automation, intelligent tools &amp; IoT-driven custom solutions for enhanced efficiency and productivity." />
-	<link rel="canonical" href="https://www.neosofttech.com/industries/manufacturing-it-services/" />
-	<meta property="og:locale" content="en_US" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="Enabling Digital Advantage for Manufacturing Brands | InfyGlobe" />
-	<meta property="og:description" content="InfyGlobe helps manufacturing brands blend smart technology, automation, intelligent tools &amp; IoT-driven custom solutions for enhanced efficiency and productivity." />
-	<meta property="og:url" content="https://www.neosofttech.com/industries/manufacturing-it-services/" />
-	<meta property="og:site_name" content="InfyGlobe" />
-	<meta property="article:publisher" content="https://www.facebook.com/neosofttechnologies" />
-	<meta property="article:modified_time" content="2023-11-24T13:46:39+00:00" />
-	<meta property="og:image" content="https://www.neosofttech.com/wp-content/uploads/2023/09/Manufacturing.png" />
-	<meta property="og:image:width" content="1600" />
-	<meta property="og:image:height" content="800" />
-	<meta property="og:image:type" content="image/png" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Enabling Digital Advantage for Manufacturing Brands | InfyGlobe" />
-	<meta name="twitter:description" content="InfyGlobe helps manufacturing brands blend smart technology, automation, intelligent tools &amp; IoT-driven custom solutions for enhanced efficiency and productivity." />
-	<meta name="twitter:image" content="https://www.neosofttech.com/wp-content/uploads/2023/09/Manufacturing.png" />
-	<meta name="twitter:site" content="@InfyGlobe" />
-	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.neosofttech.com/#website","url":"https://www.neosofttech.com/","name":"NeoSOFT","description":"","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.neosofttech.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.neosofttech.com/industries/manufacturing-it-services/#primaryimage","url":"https://www.neosofttech.com/wp-content/uploads/2023/09/Manufacturing.png","contentUrl":"https://www.neosofttech.com/wp-content/uploads/2023/09/Manufacturing.png","width":1600,"height":800},{"@type":"WebPage","@id":"https://www.neosofttech.com/industries/manufacturing-it-services/#webpage","url":"https://www.neosofttech.com/industries/manufacturing-it-services/","name":"Enabling Digital Advantage for Manufacturing Brands | NeoSOFT","isPartOf":{"@id":"https://www.neosofttech.com/#website"},"primaryImageOfPage":{"@id":"https://www.neosofttech.com/industries/manufacturing-it-services/#primaryimage"},"datePublished":"2022-12-30T08:06:59+00:00","dateModified":"2023-11-24T13:46:39+00:00","description":"NeoSOFT helps manufacturing brands blend smart technology, automation, intelligent tools & IoT-driven custom solutions for enhanced efficiency and productivity.","breadcrumb":{"@id":"https://www.neosofttech.com/industries/manufacturing-it-services/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.neosofttech.com/industries/manufacturing-it-services/"]}]},{"@type":"BreadcrumbList","@id":"https://www.neosofttech.com/industries/manufacturing-it-services/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Industries","item":"https://www.neosofttech.com/industries/"},{"@type":"ListItem","position":2,"name":"Manufacturing"}]}]}</script>
-	<!-- / Yoast SEO plugin. -->
+	
+    <link data-minify="1" rel='stylesheet' id='neosoft-footer-style-css'
+    href='https://www.neosofttech.com/wp-content/cache/min/1/wp-content/themes/neosoft/app/css/style.css?ver=1706686329'
+    media='all' />
+    
+<link rel='stylesheet' id='neosoft-selecto2-style-css' href='Css/select2.min.css' media='all' />
+<link rel='stylesheet' id='neosoft-dropdown-style-css' href='css/jquery-ui.min.css' media='all' />
 
-
-<link rel='dns-prefetch' href='//www.google.com' />
-
-<link rel="alternate" type="application/rss+xml" title="InfyGlobe &raquo; Feed" href="https://www.neosofttech.com/feed/" />
-<link rel="alternate" type="application/rss+xml" title="InfyGlobe &raquo; Comments Feed" href="https://www.neosofttech.com/comments/feed/" />
-<meta name="keywords" content="digital transformation, software development, it staff augmentation, app development, product engineering, supply chain optimization" />
-<style>
-img.wp-smiley,
-img.emoji {
-	display: inline !important;
-	border: none !important;
-	box-shadow: none !important;
-	height: 1em !important;
-	width: 1em !important;
-	margin: 0 0.07em !important;
-	vertical-align: -0.1em !important;
-	background: none !important;
-	padding: 0 !important;
-}
-</style>
-	<style id='global-styles-inline-css'>
-body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
-</style>
-<link data-minify="1" rel='stylesheet' id='contact-form-7-css'  href='https://www.neosofttech.com/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=1706686329' media='all' />
-<link data-minify="1" rel='stylesheet' id='cookie-law-info-css'  href='https://www.neosofttech.com/wp-content/cache/min/1/wp-content/plugins/cookie-law-info/public/css/cookie-law-info-public.css?ver=1706686329' media='all' />
-<link data-minify="1" rel='stylesheet' id='cookie-law-info-gdpr-css'  href='https://www.neosofttech.com/wp-content/cache/min/1/wp-content/plugins/cookie-law-info/public/css/cookie-law-info-gdpr.css?ver=1706686329' media='all' />
-<link data-minify="1" rel='stylesheet' id='megamenu-css'  href='https://www.neosofttech.com/wp-content/cache/min/1/wp-content/uploads/maxmegamenu/style.css?ver=1706686329' media='all' />
-<link data-minify="1" rel='stylesheet' id='neosoft-style-css'  href='https://www.neosofttech.com/wp-content/cache/min/1/wp-content/themes/neosoft/style.css?ver=1706686329' media='all' />
-<link data-minify="1" rel='stylesheet' id='neosoft-footer-style-css'  href='https://www.neosofttech.com/wp-content/cache/min/1/wp-content/themes/neosoft/app/css/style.css?ver=1706686329' media='all' />
-<link rel='stylesheet' id='neosoft-selecto2-style-css'  href='https://www.neosofttech.com/wp-content/themes/neosoft/app/css/select2.min.css' media='all' />
-<link rel='stylesheet' id='neosoft-dropdown-style-css'  href='https://www.neosofttech.com/wp-content/themes/neosoft/app/css/jquery-ui.min.css' media='all' />
-<script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
-<script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-includes/js/jquery/jquery-migrate.min.js' defer='defer' id='jquery-migrate-js'></script>
-<script id='cookie-law-info-js-extra' data-type="lazy" data-src="data:text/javascript;base64,CnZhciBDbGlfRGF0YSA9IHsibm5fY29va2llX2lkcyI6W10sImNvb2tpZWxpc3QiOltdLCJub25fbmVjZXNzYXJ5X2Nvb2tpZXMiOltdLCJjY3BhRW5hYmxlZCI6IiIsImNjcGFSZWdpb25CYXNlZCI6IiIsImNjcGFCYXJFbmFibGVkIjoiIiwic3RyaWN0bHlFbmFibGVkIjpbIm5lY2Vzc2FyeSIsIm9ibGlnYXRvaXJlIl0sImNjcGFUeXBlIjoiZ2RwciIsImpzX2Jsb2NraW5nIjoiMSIsImN1c3RvbV9pbnRlZ3JhdGlvbiI6IiIsInRyaWdnZXJEb21SZWZyZXNoIjoiIiwic2VjdXJlX2Nvb2tpZXMiOiIifTsKdmFyIGNsaV9jb29raWViYXJfc2V0dGluZ3MgPSB7ImFuaW1hdGVfc3BlZWRfaGlkZSI6IjUwMCIsImFuaW1hdGVfc3BlZWRfc2hvdyI6IjUwMCIsImJhY2tncm91bmQiOiIjRkZGIiwiYm9yZGVyIjoiI2IxYTZhNmMyIiwiYm9yZGVyX29uIjoiIiwiYnV0dG9uXzFfYnV0dG9uX2NvbG91ciI6IiM2MWEyMjkiLCJidXR0b25fMV9idXR0b25faG92ZXIiOiIjNGU4MjIxIiwiYnV0dG9uXzFfbGlua19jb2xvdXIiOiIjZmZmIiwiYnV0dG9uXzFfYXNfYnV0dG9uIjoiMSIsImJ1dHRvbl8xX25ld193aW4iOiIiLCJidXR0b25fMl9idXR0b25fY29sb3VyIjoiIzMzMyIsImJ1dHRvbl8yX2J1dHRvbl9ob3ZlciI6IiMyOTI5MjkiLCJidXR0b25fMl9saW5rX2NvbG91ciI6IiM0NDQiLCJidXR0b25fMl9hc19idXR0b24iOiIiLCJidXR0b25fMl9oaWRlYmFyIjoiIiwiYnV0dG9uXzNfYnV0dG9uX2NvbG91ciI6IiNkZWRmZTAiLCJidXR0b25fM19idXR0b25faG92ZXIiOiIjYjJiMmIzIiwiYnV0dG9uXzNfbGlua19jb2xvdXIiOiIjMzMzMzMzIiwiYnV0dG9uXzNfYXNfYnV0dG9uIjoiMSIsImJ1dHRvbl8zX25ld193aW4iOiIiLCJidXR0b25fNF9idXR0b25fY29sb3VyIjoiI2RlZGZlMCIsImJ1dHRvbl80X2J1dHRvbl9ob3ZlciI6IiNiMmIyYjMiLCJidXR0b25fNF9saW5rX2NvbG91ciI6IiMzMzMzMzMiLCJidXR0b25fNF9hc19idXR0b24iOiIxIiwiYnV0dG9uXzdfYnV0dG9uX2NvbG91ciI6IiM2MWEyMjkiLCJidXR0b25fN19idXR0b25faG92ZXIiOiIjNGU4MjIxIiwiYnV0dG9uXzdfbGlua19jb2xvdXIiOiIjZmZmIiwiYnV0dG9uXzdfYXNfYnV0dG9uIjoiMSIsImJ1dHRvbl83X25ld193aW4iOiIiLCJmb250X2ZhbWlseSI6ImluaGVyaXQiLCJoZWFkZXJfZml4IjoiIiwibm90aWZ5X2FuaW1hdGVfaGlkZSI6IjEiLCJub3RpZnlfYW5pbWF0ZV9zaG93IjoiIiwibm90aWZ5X2Rpdl9pZCI6IiNjb29raWUtbGF3LWluZm8tYmFyIiwibm90aWZ5X3Bvc2l0aW9uX2hvcml6b250YWwiOiJyaWdodCIsIm5vdGlmeV9wb3NpdGlvbl92ZXJ0aWNhbCI6ImJvdHRvbSIsInNjcm9sbF9jbG9zZSI6IiIsInNjcm9sbF9jbG9zZV9yZWxvYWQiOiIiLCJhY2NlcHRfY2xvc2VfcmVsb2FkIjoiIiwicmVqZWN0X2Nsb3NlX3JlbG9hZCI6IiIsInNob3dhZ2Fpbl90YWIiOiIiLCJzaG93YWdhaW5fYmFja2dyb3VuZCI6IiNmZmYiLCJzaG93YWdhaW5fYm9yZGVyIjoiIzAwMCIsInNob3dhZ2Fpbl9kaXZfaWQiOiIjY29va2llLWxhdy1pbmZvLWFnYWluIiwic2hvd2FnYWluX3hfcG9zaXRpb24iOiIxMDBweCIsInRleHQiOiIjMzMzMzMzIiwic2hvd19vbmNlX3luIjoiIiwic2hvd19vbmNlIjoiMTAwMDAiLCJsb2dnaW5nX29uIjoiIiwiYXNfcG9wdXAiOiIiLCJwb3B1cF9vdmVybGF5IjoiMSIsImJhcl9oZWFkaW5nX3RleHQiOiIiLCJjb29raWVfYmFyX2FzIjoiYmFubmVyIiwicG9wdXBfc2hvd2FnYWluX3Bvc2l0aW9uIjoiYm90dG9tLXJpZ2h0Iiwid2lkZ2V0X3Bvc2l0aW9uIjoibGVmdCJ9Owp2YXIgbG9nX29iamVjdCA9IHsiYWpheF91cmwiOiJodHRwczpcL1wvd3d3Lm5lb3NvZnR0ZWNoLmNvbVwvd3AtYWRtaW5cL2FkbWluLWFqYXgucGhwIn07Cg=="></script>
-<script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-content/plugins/cookie-law-info/public/js/cookie-law-info-public.js' defer='defer' id='cookie-law-info-js'></script>
-<script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-content/themes/neosoft/node_modules/bootstrap/dist/js/bootstrap.bundle.js' defer='defer' id='neosoft-bootstrap-script-js'></script>
-<link rel="https://api.w.org/" href="https://www.neosofttech.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.neosofttech.com/wp-json/wp/v2/pages/7480" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.neosofttech.com/xmlrpc.php?rsd" />
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.neosofttech.com/wp-includes/wlwmanifest.xml" /> 
-<link rel='shortlink' href='https://www.neosofttech.com/?p=7480' />
-<link rel="alternate" type="application/json+oembed" href="https://www.neosofttech.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.neosofttech.com%2Findustries%2Fmanufacturing-it-services%2F" />
-<link rel="alternate" type="text/xml+oembed" href="https://www.neosofttech.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.neosofttech.com%2Findustries%2Fmanufacturing-it-services%2F&#038;format=xml" />
-
-<link rel="preload" as="font" href="https://www.neosofttech.com/wp-content/themes/neosoft/app/fonts/icomoon/icomoon.ttf" crossorigin>
-<link rel="preload" as="font" href="https://www.neosofttech.com/wp-content/themes/neosoft/app/fonts/gilroy/Gilroy-Bold.woff" crossorigin>
-<link rel="preload" as="font" href="https://www.neosofttech.com/wp-content/themes/neosoft/app/fonts/gilroy/Gilroy-Light.woff" crossorigin>
-<link rel="preload" as="font" href="https://www.neosofttech.com/wp-content/themes/neosoft/app/fonts/gilroy/Gilroy-Medium.woff" crossorigin>
+<script type="rocketlazyloadscript" src='Script/jquery-migrate.min.js' defer='defer'
+    id='jquery-migrate-js'></script>
+<script type="rocketlazyloadscript" src='Script/bootstrap.bundle.js'></script>
 <link rel="stylesheet" href="./Css/Style0.css" />
-    <link rel="icon" href="./Assets/Images/infi-logo.png" sizes="32x32" />
+<link rel="icon" href="./Assets/Images/infi-logo.png" sizes="32x32" />    
 <style type="text/css">/** Mega Menu CSS: fs **/</style>
 <noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>    <!-- start  /*header menu js-mk */ -->
     <!-- <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
@@ -452,14 +389,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2379">
                                     <a href="about-us.html">About Us</a>
                                 </li>
-                                <li id="menu-item-355"
+                                <!-- <li id="menu-item-355"
                                     class="blogsmenu menu-item menu-item-type-post_type menu-item-object-page menu-item-355">
                                     <a href="blogs.html">Blogs</a>
                                 </li>
                                 <li id="menu-item-356"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-356">
                                     <a href="carreers.html">Careers</a>
-                                </li>
+                                </li> -->
                                 <li id="menu-item-357"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-357">
                                     <a href="contact.html">Contact</a>
@@ -742,13 +679,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2379">
                                     <a href="about-us.html">About Us</a>
                                 </li>
-                                <li
+                                <!-- <li
                                     class="blogsmenu menu-item menu-item-type-post_type menu-item-object-page menu-item-355">
                                     <a href="blogs.html">Blogs</a>
                                 </li>
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-356">
                                     <a href="carreers.html">Careers</a>
-                                </li>
+                                </li> -->
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-357">
                                     <a href="contact.html">Contact</a>
                                 </li>
@@ -762,65 +699,345 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     class="explore-txt">Explore</span> <span class="icon-search"></span></a>
                             <div id="myNav" class="search_explore">
                                 <div class="container d-flex flex-column align-items-center justify-content-center">
-                                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><span
+                                    <a style="right: -10px;" href="javascript:void(0)" class="closebtn d-flex" onclick="closeNav()"><span
                                             class="icon-cross"></span></a>
                                     <div class="search-content">
                                         <!-- <p>Search</p> -->
                                         <h2>What are you <br /> looking for?</h2>
                                         <div class="col-sm-12 col-md-12 search-content__searchbar">
-                                            <div class="input-group d-flex">
-                                                <!-- <input type="text" class="form-control text-search w-100" placeholder="Explore here ...">
-                                            <button class="btn btn-transparent btn-search" type="button">
-                                                <span class="icon-search"></span>
-                                            </button> -->
-                                                <form role="search" method="get" class="search-form"
-                                                    action="index.html">
-                                                    <input name="s" id="search" value="" type="text"
-                                                        class="form-control text-search w-100"
-                                                        placeholder="Search ..." autocomplete="off"
-                                                        onfocus="this.value=''">
-                                                    <div class="search-submit">
-                                                        <input type="submit" class="btn" value="Search" />
-                                                        <span class="icon-search"></span>
-                                                    </div>
-                                                </form>
+                                        <div class="input-group d-flex">
+                                            <form id="filters" role="search" class="search-form">
+                                                <input type="text" onkeyup="search()" name="keyword" class="form-control text-search w-100" placeholder="Search ...">
+                                            <div class="search-submit">
+                                                <input type="submit" class="btn" value="Search" />
+                                                    <span class="icon-search"></span>
+                                            </div>
+                                            </form>
+                                          
+                                     
                                             </div>
                                         </div>
 
-                                        <div class="area__interest d-flex">
-                                            <div class="area__interest_text">
-                                                <p>Trending</p>
-                                            </div>
-                                            <div class="area__interest_btn">
-                                                <!-- <ul class="d-flex flex-wrap mb-0"> -->
-                                                <!-- <li><a class="btn btn--tertiary-outline"
-                                                        href="?s=&se=&t=tag"></a>
-                                                </li> -->
-                                                <!-- </ul> -->
-                                                <ul class="d-flex flex-wrap mb-0">
-                                                    <li><a class="btn btn--tertiary-outline"
-                                                            href="index.html">Services</a>
-                                                    </li>
-                                                    <li><a class="btn btn--tertiary-outline"
-                                                            href="index.html">Solutions</a>
-                                                    </li>
-                                                    <li><a class="btn btn--tertiary-outline"
-                                                            href="index.html">Locations</a>
-                                                    </li>
-                                                    <li><a class="btn btn--tertiary-outline"
-                                                            href="index.html">Jobs</a>
-                                                    </li>
-                                                    <li><a class="btn btn--tertiary-outline"
-                                                            href="index.html">
-                                                            InfyGlobe</a>
-                                                    </li>
-                                                </ul>
+                                        <div class="area__interest d-flex" style="padding: 0 0 2rem 0;">
+                                        <div class="area__interest_text" >
+                                            <p>Trending</p>
+                                        </div>
+                                        </div>
+                                        <div class="search-content">
+                                            <div>
+                                                <div class="wrapper search-section">
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"><a href="digitaltransformation.html">Digital
+                                                                Transformation</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item blue search-terms">
+                                                        <h2 class="font-semibold"> <a href=" team-augmentaion.html">Team
+                                                                Augmentation</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item green search-terms">
+                                                        <h2 class="font-semibold"> <a href="java.html">Java</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href=" php.html">PHP</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item blue search-terms">
+                                                        <h2 class="font-semibold"> <a href="python.html">Python</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item blue search-terms">
+                                                        <h2 class="font-semibold"><a href="reactjs.html">React JS</a></h2>
+                                                    </div>
+                                                    <div class="item green search-terms">
+                                                        <h2 class="font-semibold"> <a href=" dot-net.html">.NET</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"><a href=" front-end.html">Front-End Development</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="ios.html">iOS</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href=" android.html">Android</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"><a href=" flutter.html">Flutter</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href=" nodejs.html">Node JS</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href=" angular.html">Angular</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href=" devops-dev.html">DevOps</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href=" bigdata-dev.html">Big data Development Company</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"><a href="appdevelopment.html">Application Development</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item blue search-terms">
+                                                        <h2 class="font-semibold"> <a href="cloud-computing.html">Cloud Consulting</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item green search-terms">
+                                                        <h2 class="font-semibold"> <a href="devops.html">DevOps Consulting</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="bigdata.html">Big Data and Analytics</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item blue search-terms">
+                                                        <h2 class="font-semibold"> <a href="python.html">Python</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item blue search-terms">
+                                                        <h2 class="font-semibold"><a href="artificial-intelligence.html">Artificial Intelligence</a></h2>
+                                                    </div>
+                                                    <div class="item green search-terms">
+                                                        <h2 class="font-semibold"> <a href="quality-engineering.html">Quality Engineering</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"><a href="internet-of-things.html">Internet of Things</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="blockchain.html">Blockchain</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="ui-ux.html">UI/UX</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"><a href="product-development.html">Product Development</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="ims.html">IMS</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="data-science.html">Data Science</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="innovation-lab.html">Innovation Lab</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="ecommerce-software-development.html">Ecommmerce and Retail </a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item blue search-terms">
+                                                        <h2 class="font-semibold"> <a href="financial-it-services.html">Financial Services</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item green search-terms">
+                                                        <h2 class="font-semibold"> <a href="professional-services.html">Professional Services</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="healthcare-it-services.html">Healthcare</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item blue search-terms">
+                                                        <h2 class="font-semibold"> <a href="logistics-software-development.html">Logistics & Supply Chain</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item blue search-terms">
+                                                        <h2 class="font-semibold"><a href="manufacturing-it-services.html">Manufacturing</a></h2>
+                                                    </div>
+                                                    <div class="item green search-terms">
+                                                        <h2 class="font-semibold"> <a href="sports.html">Sports</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"><a href="travel-app-development.html">Travel and Hospitality</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="real-estate-app-development.html">Real Estate</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="telecom-software-development.html">Telecom</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"><a href="elearning-software-development.html">Education And Learninig</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="media-software-development.html">Media and Entertainment</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="isvs.html">ISVs - Digital Products</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="crm.html">CRM</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="ecommerce.html">Ecommerce</a></h2>
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"><a href="enterprise-resource-planing-erp.html">ERP</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item blue search-terms">
+                                                        <h2 class="font-semibold"> <a href="content-management-system-cms.html">CMS</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item green search-terms">
+                                                        <h2 class="font-semibold"> <a href="robotic-process-automation-rpa.html">RPA</a></h2>
+                                                
+                                                    </div>
+                                                    <div class="item red search-terms">
+                                                        <h2 class="font-semibold"> <a href="sap.html">SAP</a></h2>
+                                                
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="pagination d-flex justify-center my-5"></div>
+                                            <script>
+                                                const wrapper = document.querySelector(".wrapper")
+                                                const pagination = document.querySelector(".pagination")
+                                                const items = Array.from(document.querySelectorAll(".item"))
+                                                let filteredItems = items;
+                                                let currPage = 1;
+
+                                                function search() {
+                                                // filters.addEventListener('submit', e => {
+                                                // e.preventDefault()
+                                                // console.log(e.target);
+
+                                                const keyword = document.querySelector("input[name=keyword]").value
+
+                                               if (keyword) {
+                                                    filteredItems = items.filter(el => {
+                                                    return el.querySelector("h2").innerText.toLowerCase(keyword).indexOf(keyword) > -1
+                                                    })
+                                                } else {
+                                                    filteredItems = items
+                                                }
+                                                currPage = 1;
+                                                if (filteredItems.length !== 0) {
+                                                    pagination.style.display = "flex";
+                                                    setHTML(filteredItems)
+                                                } else {
+                                                    pagination.style.display = "none";
+                                                    wrapper.innerHTML = "<p>No Data Found.</p>"
+                                                }
+                                                // })
+                                            }
+
+                                                function paginate(totalItems, currentPage = 1, pageSize = 2, maxPages = 3) {
+
+                                                let totalPages = Math.ceil(totalItems / pageSize);
+                                                if (currentPage < 1) {
+                                                    currentPage = 1;
+                                                } else if (currentPage > totalPages) {
+                                                    currentPage = totalPages;
+                                                }
+
+                                                let startPage, endPage;
+                                                if (totalPages <= maxPages) {
+                                                    startPage = 1;
+                                                    endPage = totalPages;
+                                                } else {
+                                                    let maxPagesBeforeCurrentPage = Math.floor(maxPages / 2);
+                                                    let maxPagesAfterCurrentPage = Math.ceil(maxPages / 2) - 1;
+                                                    if (currentPage <= maxPagesBeforeCurrentPage) {
+                                                    startPage = 1;
+                                                    endPage = maxPages;
+                                                    } else if (currentPage + maxPagesAfterCurrentPage >= totalPages) {
+                                                    startPage = totalPages - maxPages + 1;
+                                                    endPage = totalPages;
+                                                    } else {
+                                                    startPage = currentPage - maxPagesBeforeCurrentPage;
+                                                    endPage = currentPage + maxPagesAfterCurrentPage;
+                                                    }
+                                                }
+
+                                                let startIndex = (currentPage - 1) * pageSize;
+                                                let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
+
+                                                let pages = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
+
+                                                return {
+                                                    totalItems: totalItems,
+                                                    currentPage: currentPage,
+                                                    pageSize: pageSize,
+                                                    totalPages: totalPages,
+                                                    startPage: startPage,
+                                                    endPage: endPage,
+                                                    startIndex: startIndex,
+                                                    endIndex: endIndex,
+                                                    pages: pages
+                                                };
+                                                }
+
+                                                function setHTML(items) {
+                                                wrapper.innerHTML = ""
+                                                pagination.innerHTML = ""
+                                                const { totalItems, currentPage, pageSize, totalPages, startPage, endPage, startIndex, endIndex, pages } = paginate(items.length, currPage, 4, 5)
+
+                                                const nav = document.createElement("nav")
+                                                nav.classList.add(...['relative', 'z-0', 'inline-flex', 'rounded-md', 'shadow-sm', '-space-x-px' ,'w-100'])
+
+                                                let paginationHTML = ""
+                                                paginationHTML += `<button ${currentPage === 1 && 'disabled'} class="${currentPage === 1 ? 'cursor-not-allowed' : 'prev'} relative mx-1 inline-flex items-center px-2 py-2 rounded-l-md border" style="background: transparent; border-radius:5rem; padding:1% 2% !important; color:white;">
+                                                                <span class="sr-only">Previous</span>
+                                                               
+                                                            </button>`
+
+                                                pages.forEach(page => {
+                                                    if (currentPage === page) {
+                                                    paginationHTML += `<button class="z-10 mx-1 relative inline-flex items-center px-4 py-2 border text-sm font-medium" style="background: white; border-radius:5rem; padding:1% 2%!important; color:black;" page="${page}" ${currentPage === page && 'disabled'}>${page}</button>`
+                                                    } else {
+                                                    paginationHTML += `<button class="page mx-1 relative inline-flex items-center px-4 py-2 border text-sm font-medium" style="background: transparent; border-radius:5rem; padding:1% 2%!important; color:white;" page="${page}" ${currentPage === page && 'disabled'}>${page}</button>`
+                                                    }
+                                                })
+
+                                                paginationHTML += `<button ${currentPage === endPage && 'disabled'} class="${currentPage === endPage ? 'cursor-not-allowed' : 'next'} relative mx-1 inline-flex items-center px-2 py-2 rounded-r-md border" style="background: transparent; border-radius:5rem; padding:1% 2% !important; color:white;">
+                                                                <span class="sr-only">Next</span>
+                                                               
+                                                            </button>`
+
+                                                nav.innerHTML = paginationHTML
+                                                pagination.append(nav)
+
+                                                const start = (currentPage - 1) * pageSize, end = currentPage * pageSize;
+                                                items.slice(start, end).forEach(el => {
+                                                    wrapper.append(el)
+                                                })
+                                                }
+
+                                                document.body.addEventListener("change", function (e) {
+                                                console.log(e.target);
+                                                })
+                                                document.addEventListener('click', function (e) {
+                                                const $this = e.target
+                                                console.log($this);
+                                                if ($this.classList.contains("page")) {
+                                                    currPage = parseInt($this.getAttribute("page"))
+                                                    setHTML(filteredItems)
+                                                }
+                                                if ($this.classList.contains("next")) {
+                                                    currPage += 1;
+                                                    setHTML(filteredItems)
+                                                }
+                                                if ($this.classList.contains("prev")) {
+                                                    currPage -= 1;
+                                                    setHTML(filteredItems)
+                                                }
+                                                });
+                                                setHTML(filteredItems)
+
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
 
                             <div class="side-menu">
                                 <div class="side-menu__inner">
@@ -1103,14 +1320,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9888">
                                                     <a href="about-us.html">About Us</a>
                                                 </li>
-                                                <li id="menu-item-9889"
+                                                <!-- <li id="menu-item-9889"
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9889">
                                                     <a href="blogs.html">Blogs</a>
                                                 </li>
                                                 <li id="menu-item-9890"
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9890">
                                                     <a href="carreers.html">Career</a>
-                                                </li>
+                                                </li> -->
                                                 <li id="menu-item-9891"
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9891">
                                                     <a href="contact.html">Contact</a>
@@ -1712,7 +1929,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- slider start
 <section class="path-breaking-container section-padding lefttext-slider">
         <div class="container">
-            <p>Get Powered by NeoSOFT</p>
+            <p>Get Powered by InfyGlobe</p>
             <h2 class="h2-margin">Expertise you need. Services you deserve! </h2>
             <p>Inventing banking solutions that reinvent the future.</p> <br>
             <div class="path-breaking-container_slider">
@@ -1864,7 +2081,7 @@ slider end  -->
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-between align-items-center blogsection__title">
                     <h2>Blogs</h2>
-                    <a href="blogs.html" class="btn btn--secondary-outline arrow-button"><span> View all</span><span class="icon-arrow"></span></a>
+                    <a href="#" class="btn btn--secondary-outline arrow-button"><span> View all</span><span class="icon-arrow"></span></a>
                 </div>
             </div>
 
@@ -1940,100 +2157,174 @@ slider end  -->
 <!-- Homepage Contact Form Starts -->
 <!-- Contact section start -->
 <section class="contactform section-padding" id="get-in-touch-contact">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h2 class="contactform__quetsion">Let's Get Started</h2>
-                <p class="section_description contactform__paraline">Leave a message here and <br> we shall connect with you to discuss your digital needs.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="contactform__quetsion">Let's Get Started</h2>
+                    <p class="section_description contactform__paraline">Leave a message here and we shall
+                        connect with you to discuss your digital needs.</p>
+                </div>
+                <div class="col-md-6">
+                    <div role="form" class="wpcf7" id="wpcf7-f107-o1" lang="en-US" dir="ltr">
+                        <div class="screen-reader-response">
+                            <p role="status" aria-live="polite" aria-atomic="true"></p>
+                            <ul></ul>
+                        </div>
+                        <form  id="lets-contact" method="post"
+                            class="wpcf7-form init contactform__form" novalidate="novalidate"
+                            data-status="init">
+                            <input type="hidden" name="access_key" value="a8fdf330-6bed-4ca8-bc66-fa2c76fb88a7">
+                            <div class="row row-60">
+                               
+                                <div class="customer_success_text"
+                                    style="margin-bottom: 6rem; display:none;" id="myModal2">
+                                    <div style="background: #ed1819;position: relative;">
+                                        <span class="icon-cross close"
+                                            style="position: absolute; right: 1rem; z-index: 2; padding: 1rem 1rem; border: 1px solid #fff; border-radius: 50%; font-size:10px;top: 0.5rem;"></span>
+                                        </p>
+                                        <div class="inner_text_customer" style="padding: 1rem;">
+                                            <p class="d-flex m-0" style="width:90%">Thanks for reaching out.
+                                                Our consultants will shortly get in touch with you.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6   mt-lg-0 contactform__filed">
+                                    <label for="" class="form-label">First Name *</label><br />
+                                    <span class="wpcf7-form-control-wrap y-fname"><input type="text"
+                                            name="y-fname" value="" size="40"
+                                            class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
+                                            aria-required="true" aria-invalid="false" /></span>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6   mt-lg-0 contactform__filed">
+                                    <label for="" class="form-label">Last Name *</label><br />
+                                    <span class="wpcf7-form-control-wrap y-lname"><input type="text"
+                                            name="y-lname" value="" size="40"
+                                            class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
+                                            aria-required="true" aria-invalid="false" /></span>
+                                </div>
+                            </div>
+                            <div class="row row-60">
+                                <div class="col-sm-12 col-md-12 col-lg-6  mt-lg-0   contactform__filed">
+                                    <label for="" class="form-label">Email Id *</label><br />
+                                    <span class="wpcf7-form-control-wrap your-email"><input type="email"
+                                            name="your-email" value="" size="40"
+                                            class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control"
+                                            aria-required="true" aria-invalid="false" /></span>
+                                </div>
+                                <div class="col-lg-6 mt-lg-0 contactform__filed">
+                                    <label for="" class="form-label">Contact Number * </label><br />
+                                    <span class="wpcf7-form-control-wrap your-number"><input type="tel"
+                                            name="your-number" value="" size="40" maxlength="10"
+                                            minlength="10"
+                                            class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel form-control"
+                                            aria-required="true" aria-invalid="false" /></span>
+                                </div>
+                            </div>
+                            <div class="row row-60">
+                                <div class="col-lg-6 mt-lg-0   contactform__filed">
+                                    <label for="" class="form-label">Organization / Institute</label><br />
+                                    <span class="wpcf7-form-control-wrap org-name"><input type="text"
+                                            name="org-name" value="" size="40"
+                                            class="wpcf7-form-control wpcf7-text form-control"
+                                            aria-invalid="false" /></span>
+                                </div>
+                                <div class="col-lg-6 mt-lg-0   contactform__filed">
+                                    <label for="" class="form-label">Job Title</label><br />
+                                    <span class="wpcf7-form-control-wrap job-title"><input type="text"
+                                            name="job-title" value="" size="40"
+                                            class="wpcf7-form-control wpcf7-text form-control"
+                                            aria-invalid="false" /></span>
+                                </div>
+                            </div>
+                            <div class="row row-60">
+                                <div class="col-lg-12 mt-lg-0  contactform__filed">
+                                    <label for="" class="form-label">How can we help you? *</label><br />
+                                    <span class="wpcf7-form-control-wrap help-text"><input type="text"
+                                            name="help-text" value="" size="40"
+                                            class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
+                                            aria-required="true" aria-invalid="false" /></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="contactus__checkbox homepagefromcheck">
+                                    <span class="wpcf7-form-control-wrap agree-privacy-policy"><span
+                                            class="wpcf7-form-control wpcf7-checkbox wpcf7-validates-as-required form-check-input"
+                                            id="flexCheckDefault"><span
+                                                class="wpcf7-list-item first last"><label><input
+                                                        type="checkbox" name="agree-privacy-policy[]"
+                                                        value="I agree to the privacy policy." /><span
+                                                        class="wpcf7-list-item-label">I agree to the privacy
+                                                        policy.</span></label></span></span></span> <label
+                                        for=" " class="form label"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 contactus__inputs direct-email">
+                                You can also email us directly at <a
+                                    href="mailto:info@infyglobe.com">info@infyglobe.com</a>
+                            </div>
+                            <div class="col-md-12 contactus__inputs mb-0">
+                                <input type="hidden" name="capture_page_url" value="manufacturing-it-services" class="wpcf7-form-control wpcf7-hidden" id="capture_page_url" />
+                       
+                                <div class="col-md-6 contactus__inputs">
+                                    <div class="submit-btn-outer">
+                                        <input type="submit" value="Submit"
+                                            class="wpcf7-form-control has-spinner wpcf7-submit w-100 d-flex align-items-center justify-content-between btn contactform__submitbtn btn--primary" /><span
+                                            class="icon-arrow"></span>
+                                    </div>
+                                </div>
+                                <div id="result"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <div role="form" class="wpcf7" id="wpcf7-f107-o1" lang="en-US" dir="ltr">
-<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
-<form action="/industries/manufacturing-it-services/#wpcf7-f107-o1" method="post" class="wpcf7-form init contactform__form" novalidate="novalidate" data-status="init">
-<div style="display: none;">
-<input type="hidden" name="_wpcf7" value="107" />
-<input type="hidden" name="_wpcf7_version" value="5.5.6.1" />
-<input type="hidden" name="_wpcf7_locale" value="en_US" />
-<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f107-o1" />
-<input type="hidden" name="_wpcf7_container_post" value="0" />
-<input type="hidden" name="_wpcf7_posted_data_hash" value="" />
-<input type="hidden" name="_wpcf7_recaptcha_response" value="" />
-</div>
-<div class="row row-60">
-<div style="display:none;">
-<div class="wpcf7-response-output" aria-hidden="true"></div>
-</div>
-<div class="customer_success_text" style="margin-bottom: 6rem; display:none;" id="myModal2">
-<div style="background: #ed1819;position: relative;">
-  <span class="icon-cross close" style="position: absolute; right: 1rem; z-index: 2; padding: 1rem 1rem; border: 1px solid #fff; border-radius: 50%; font-size:10px;top: 0.5rem;"></span></p>
-<div class="inner_text_customer" style="padding: 1rem;">
-<p class="d-flex m-0" style="width:90%">Thanks for reaching out. Our consultants will shortly get in touch with you.</p>
-</div>
-</div>
-</div>
-<div class="col-sm-12 col-md-12 col-lg-6   mt-lg-0 contactform__filed">
-        <label for="" class="form-label">First Name *</label><br />
-        <span class="wpcf7-form-control-wrap y-fname"><input type="text" name="y-fname" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" /></span>
-    </div>
-<div class="col-sm-12 col-md-12 col-lg-6   mt-lg-0 contactform__filed">
-        <label for="" class="form-label">Last Name *</label><br />
-        <span class="wpcf7-form-control-wrap y-lname"><input type="text" name="y-lname" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" /></span>
-    </div>
-</div>
-<div class="row row-60">
-<div class="col-sm-12 col-md-12 col-lg-6  mt-lg-0   contactform__filed">
-        <label for="" class="form-label">Email Id *</label><br />
-        <span class="wpcf7-form-control-wrap your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" /></span>
-    </div>
-<div class="col-lg-6 mt-lg-0 contactform__filed">
-        <label for="" class="form-label">Contact Number * </label><br />
-        <span class="wpcf7-form-control-wrap your-number"><input type="tel" name="your-number" value="" size="40" maxlength="10" minlength="10" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel form-control" aria-required="true" aria-invalid="false" /></span>
-    </div>
-</div>
-<div class="row row-60">
-<div class="col-lg-6 mt-lg-0   contactform__filed">
-        <label for="" class="form-label">Organization / Institute</label><br />
-        <span class="wpcf7-form-control-wrap org-name"><input type="text" name="org-name" value="" size="40" class="wpcf7-form-control wpcf7-text form-control" aria-invalid="false" /></span>
-    </div>
-<div class="col-lg-6 mt-lg-0   contactform__filed">
-        <label for="" class="form-label">Job Title</label><br />
-        <span class="wpcf7-form-control-wrap job-title"><input type="text" name="job-title" value="" size="40" class="wpcf7-form-control wpcf7-text form-control" aria-invalid="false" /></span>
-    </div>
-</div>
-<div class="row row-60">
-<div class="col-lg-12 mt-lg-0  contactform__filed">
-        <label for="" class="form-label">How can we help you? *</label><br />
-        <span class="wpcf7-form-control-wrap help-text"><input type="text" name="help-text" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" /></span>
-    </div>
-</div>
-<div class="col-md-12">
-<div class="contactus__checkbox homepagefromcheck">
-            <span class="wpcf7-form-control-wrap agree-privacy-policy"><span class="wpcf7-form-control wpcf7-checkbox wpcf7-validates-as-required form-check-input" id="flexCheckDefault"><span class="wpcf7-list-item first last"><label><input type="checkbox" name="agree-privacy-policy[]" value="I agree to the privacy policy." /><span class="wpcf7-list-item-label">I agree to the privacy policy.</span></label></span></span></span> <label for=" " class="form label" ></label>
         </div>
-</div>
-<div class="col-md-12 contactus__inputs direct-email">
-            You can also email us directly at <a href="#">info@infyglobe.com</a>
-</div>
-<div class="col-md-12 contactus__inputs mb-0">
-<input type="hidden" name="capture_page_url" value="manufacturing-it-services.html" class="wpcf7-form-control wpcf7-hidden" id="capture_page_url" />
-<input type="hidden" name="utm_source" value="" class="wpcf7-form-control wpcf7-hidden" id="utm_source" />
-<input type="hidden" name="utm_medium" value="" class="wpcf7-form-control wpcf7-hidden" id="utm_medium" />
-<input type="hidden" name="utm_term" value="" class="wpcf7-form-control wpcf7-hidden" id="utm_term" />
-<input type="hidden" name="utm_content" value="" class="wpcf7-form-control wpcf7-hidden" id="utm_content" />
-<input type="hidden" name="utm_campaign" value="" class="wpcf7-form-control wpcf7-hidden" id="utm_campaign" />
-<div class="contactus__inputs">
-
-</div>
-<div class="col-md-6 contactus__inputs">
-<div class="submit-btn-outer">
-            <input type="submit" value="Submit" class="wpcf7-form-control has-spinner wpcf7-submit w-100 d-flex align-items-center justify-content-between btn contactform__submitbtn btn--primary" /><span class="icon-arrow"></span>
-        </div>
-</div>
-</div>
-</form></div>            </div>
-        </div>
-    </div>
-</section>
+    
+        
+    <!-- Contact Script start-->
+    <script>
+    const form = document.getElementById('lets-contact');
+    const result = document.getElementById('result');
+    
+    form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+    result.innerHTML = "Please wait..."
+    
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: json
+    })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.innerHTML = json.message;
+            } else {
+                console.log(response);
+                result.innerHTML = json.message;
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+        })
+        .then(function () {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 3000);
+        });
+    });
+    </script>
+    <!-- Contact Script end-->
+    
+    </section>
 
 
 
@@ -2068,10 +2359,10 @@ slider end  -->
                                     <li><a href="about-us.html">About us</a></li>
                                     <li><a href="industries.html">Industries</a></li>
                                     
-                                    <li><a href="carreers.html">Careers</a></li>
+                                    <!-- <li><a href="carreers.html">Careers</a></li> -->
                                     <li><a href="contact.html">Contact us</a></li>
-                                    <li class="footer_menu_title">Resources</li>
-                                    <li><a href="blogs.html">Blogs</a></li>
+                                    <!-- <li class="footer_menu_title">Resources</li>
+                                    <li><a href="blogs.html">Blogs</a></li> -->
                                 </ul>
                                 <ul class="footersection__footerbottom pb-4 footersection__footercenter">
                                     <li class="footer_menu_title">Services</li>
@@ -2101,20 +2392,7 @@ slider end  -->
                                     <li><a href="enterprise-resource-planing-erp.html">ERP</a></li>
                                 </ul>
                             </div>
-                            <div class="footersection__thirdsection d-flex align-items-center  flex-column">
-                                <div>
-                                    <h5 class="footersection__brandtitle">Our Brands</h5>
-                                    <p></p>
-                                </div>
-                                <ul class="footersection__brand">
-                                    <li><a target="_blank" href="#"><img src="./Assets/Images/c5.png"
-                                                style="height: 6rem;" alt="S4S"></a>
-                                    </li>
-                                    <li><a target="_blank" href="#"><img src="./Assets/Images/q-logo.png"
-                                                alt="Neo Smile"></a>
-                                    </li>
-                                </ul>
-                            </div>
+                       
                             <!-- <div class="ecoengine" id="eco__engine"><div class="ns-eco">
 <div class="eco__button">
 <ul>
@@ -2181,147 +2459,7 @@ slider end  -->
     
 </div><!-- #page -->
 
-<!--googleoff: all--><div id="cookie-law-info-bar" data-nosnippet="true"><span><div class="cli-bar-container cli-style-v2"><div class="cli-bar-message">We use cookies on our website to give you the most relevant experience by remembering your preferences and repeat visits. By clicking “Accept All”, you consent to the use of ALL the cookies. However, you may visit "Cookie Settings" to provide a controlled consent.</div><div class="cli-bar-btn_container"><a role='button' class="medium cli-plugin-button cli-plugin-main-button cli_settings_button" style="margin:0px 5px 0px 0px">Cookie Settings</a><a id="wt-cli-accept-all-btn" role='button' data-cli_action="accept_all" class="wt-cli-element medium cli-plugin-button wt-cli-accept-all-btn cookie_action_close_header cli_action_button">Accept All</a></div></div></span></div><div id="cookie-law-info-again" data-nosnippet="true"><span id="cookie_hdr_showagain">Manage consent</span></div><div class="cli-modal" data-nosnippet="true" id="cliSettingsPopup" tabindex="-1" role="dialog" aria-labelledby="cliSettingsPopup" aria-hidden="true">
-  <div class="cli-modal-dialog" role="document">
-	<div class="cli-modal-content cli-bar-popup">
-		  <button type="button" class="cli-modal-close" id="cliModalClose">
-			<svg class="" viewbox="0 0 24 24"><path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"></path><path d="M0 0h24v24h-24z" fill="none"></path></svg>
-			<span class="wt-cli-sr-only">Close</span>
-		  </button>
-		  <div class="cli-modal-body">
-			<div class="cli-container-fluid cli-tab-container">
-	<div class="cli-row">
-		<div class="cli-col-12 cli-align-items-stretch cli-px-0">
-			<div class="cli-privacy-overview">
-				<h4>Privacy Overview</h4>				<div class="cli-privacy-content">
-					<div class="cli-privacy-content-text">This website uses cookies to improve your experience while you navigate through the website. Out of these, the cookies that are categorized as necessary are stored on your browser as they are essential for the working of basic functionalities of the website. We also use third-party cookies that help us analyze and understand how you use this website. These cookies will be stored in your browser only with your consent. You also have the option to opt-out of these cookies. But opting out of some of these cookies may affect your browsing experience.</div>
-				</div>
-				<a class="cli-privacy-readmore" aria-label="Show more" role="button" data-readmore-text="Show more" data-readless-text="Show less"></a>			</div>
-		</div>
-		<div class="cli-col-12 cli-align-items-stretch cli-px-0 cli-tab-section-container">
-												<div class="cli-tab-section">
-						<div class="cli-tab-header">
-							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="necessary" data-toggle="cli-toggle-tab">
-								Necessary							</a>
-															<div class="wt-cli-necessary-checkbox">
-									<input type="checkbox" class="cli-user-preference-checkbox"  id="wt-cli-checkbox-necessary" data-id="checkbox-necessary" checked="checked"  />
-									<label class="form-check-label" for="wt-cli-checkbox-necessary">Necessary</label>
-								</div>
-								<span class="cli-necessary-caption">Always Enabled</span>
-													</div>
-						<div class="cli-tab-content">
-							<div class="cli-tab-pane cli-fade" data-id="necessary">
-								<div class="wt-cli-cookie-description">
-									Necessary cookies are absolutely essential for the website to function properly. These cookies ensure basic functionalities and security features of the website, anonymously.
-<table class="cookielawinfo-row-cat-table cookielawinfo-winter"><thead><tr><th class="cookielawinfo-column-1">Cookie</th><th class="cookielawinfo-column-3">Duration</th><th class="cookielawinfo-column-4">Description</th></tr></thead><tbody><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">cookielawinfo-checkbox-analytics</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Analytics".</td></tr><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">cookielawinfo-checkbox-functional</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">The cookie is set by GDPR cookie consent to record the user consent for the cookies in the category "Functional".</td></tr><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">cookielawinfo-checkbox-necessary</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">This cookie is set by GDPR Cookie Consent plugin. The cookies is used to store the user consent for the cookies in the category "Necessary".</td></tr><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">cookielawinfo-checkbox-others</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Other.</td></tr><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">cookielawinfo-checkbox-performance</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Performance".</td></tr><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">viewed_cookie_policy</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">The cookie is set by the GDPR Cookie Consent plugin and is used to store whether or not user has consented to the use of cookies. It does not store any personal data.</td></tr></tbody></table>								</div>
-							</div>
-						</div>
-					</div>
-																	<div class="cli-tab-section">
-						<div class="cli-tab-header">
-							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="functional" data-toggle="cli-toggle-tab">
-								Functional							</a>
-															<div class="cli-switch">
-									<input type="checkbox" id="wt-cli-checkbox-functional" class="cli-user-preference-checkbox"  data-id="checkbox-functional" />
-									<label for="wt-cli-checkbox-functional" class="cli-slider" data-cli-enable="Enabled" data-cli-disable="Disabled"><span class="wt-cli-sr-only">Functional</span></label>
-								</div>
-													</div>
-						<div class="cli-tab-content">
-							<div class="cli-tab-pane cli-fade" data-id="functional">
-								<div class="wt-cli-cookie-description">
-									Functional cookies help to perform certain functionalities like sharing the content of the website on social media platforms, collect feedbacks, and other third-party features.
-								</div>
-							</div>
-						</div>
-					</div>
-																	<div class="cli-tab-section">
-						<div class="cli-tab-header">
-							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="performance" data-toggle="cli-toggle-tab">
-								Performance							</a>
-															<div class="cli-switch">
-									<input type="checkbox" id="wt-cli-checkbox-performance" class="cli-user-preference-checkbox"  data-id="checkbox-performance" />
-									<label for="wt-cli-checkbox-performance" class="cli-slider" data-cli-enable="Enabled" data-cli-disable="Disabled"><span class="wt-cli-sr-only">Performance</span></label>
-								</div>
-													</div>
-						<div class="cli-tab-content">
-							<div class="cli-tab-pane cli-fade" data-id="performance">
-								<div class="wt-cli-cookie-description">
-									Performance cookies are used to understand and analyze the key performance indexes of the website which helps in delivering a better user experience for the visitors.
-								</div>
-							</div>
-						</div>
-					</div>
-																	<div class="cli-tab-section">
-						<div class="cli-tab-header">
-							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="analytics" data-toggle="cli-toggle-tab">
-								Analytics							</a>
-															<div class="cli-switch">
-									<input type="checkbox" id="wt-cli-checkbox-analytics" class="cli-user-preference-checkbox"  data-id="checkbox-analytics" />
-									<label for="wt-cli-checkbox-analytics" class="cli-slider" data-cli-enable="Enabled" data-cli-disable="Disabled"><span class="wt-cli-sr-only">Analytics</span></label>
-								</div>
-													</div>
-						<div class="cli-tab-content">
-							<div class="cli-tab-pane cli-fade" data-id="analytics">
-								<div class="wt-cli-cookie-description">
-									Analytical cookies are used to understand how visitors interact with the website. These cookies help provide information on metrics the number of visitors, bounce rate, traffic source, etc.
-								</div>
-							</div>
-						</div>
-					</div>
-																	<div class="cli-tab-section">
-						<div class="cli-tab-header">
-							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="advertisement" data-toggle="cli-toggle-tab">
-								Advertisement							</a>
-															<div class="cli-switch">
-									<input type="checkbox" id="wt-cli-checkbox-advertisement" class="cli-user-preference-checkbox"  data-id="checkbox-advertisement" />
-									<label for="wt-cli-checkbox-advertisement" class="cli-slider" data-cli-enable="Enabled" data-cli-disable="Disabled"><span class="wt-cli-sr-only">Advertisement</span></label>
-								</div>
-													</div>
-						<div class="cli-tab-content">
-							<div class="cli-tab-pane cli-fade" data-id="advertisement">
-								<div class="wt-cli-cookie-description">
-									Advertisement cookies are used to provide visitors with relevant ads and marketing campaigns. These cookies track visitors across websites and collect information to provide customized ads.
-								</div>
-							</div>
-						</div>
-					</div>
-																	<div class="cli-tab-section">
-						<div class="cli-tab-header">
-							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="others" data-toggle="cli-toggle-tab">
-								Others							</a>
-															<div class="cli-switch">
-									<input type="checkbox" id="wt-cli-checkbox-others" class="cli-user-preference-checkbox"  data-id="checkbox-others" />
-									<label for="wt-cli-checkbox-others" class="cli-slider" data-cli-enable="Enabled" data-cli-disable="Disabled"><span class="wt-cli-sr-only">Others</span></label>
-								</div>
-													</div>
-						<div class="cli-tab-content">
-							<div class="cli-tab-pane cli-fade" data-id="others">
-								<div class="wt-cli-cookie-description">
-									Other uncategorized cookies are those that are being analyzed and have not been classified into a category as yet.
-								</div>
-							</div>
-						</div>
-					</div>
-										</div>
-	</div>
-</div>
-		  </div>
-		  <div class="cli-modal-footer">
-			<div class="wt-cli-element cli-container-fluid cli-tab-container">
-				<div class="cli-row">
-					<div class="cli-col-12 cli-align-items-stretch cli-px-0">
-						<div class="cli-tab-footer wt-cli-privacy-overview-actions">
-						
-															<a id="wt-cli-privacy-save-btn" role="button" tabindex="0" data-cli-action="accept" class="wt-cli-privacy-btn cli_setting_save_button wt-cli-privacy-accept-btn cli-btn">SAVE &amp; ACCEPT</a>
-													</div>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-  </div>
-</div>
+<!--googleoff: all-->
 <div class="cli-modal-backdrop cli-fade cli-settings-overlay"></div>
 <div class="cli-modal-backdrop cli-fade cli-popupbar-overlay"></div>
 <!--googleon: all-->    <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
@@ -2376,7 +2514,6 @@ var RocketPreloadLinksConfig = {"excludeUris":"\/clientele\/|\/outsource-softwar
 }());
 </script>
 <script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-content/themes/neosoft/js/navigation.js' defer='defer' id='neosoft-navigation-js'></script>
-<script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-content/themes/neosoft/js/olarkchat.js' async='async' id='neosoft-olarkchat-js'></script>
 <script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-content/themes/neosoft/js/linkedin.js' defer='defer' id='neosoft-linkedin-js'></script>
 <script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-content/themes/neosoft/js/snap.licdn.js' defer='defer' id='neosoft-snap-js'></script>
 <script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-content/themes/neosoft/node_modules/jquery/dist/jquery.min.js' id='neosoft-jquerymin-script-js'></script>
@@ -2387,11 +2524,7 @@ var RocketPreloadLinksConfig = {"excludeUris":"\/clientele\/|\/outsource-softwar
 var myAjax = {"ajaxurl":"https:\/\/www.neosofttech.com\/wp-admin\/admin-ajax.php"};
 </script>
 <script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-content/themes/neosoft/app/js/min/custom.min.js' defer='defer' id='neosoft-custom-script-js'></script>
-<script type="rocketlazyloadscript" src='https://www.google.com/recaptcha/api.js?render=6LdhSkIoAAAAACICg2q1m7CCmCRAdluGCeHdsgCZ&#038;ver=3.0' defer='defer' id='google-recaptcha-js'></script>
-<script id='wpcf7-recaptcha-js-extra'>
-var wpcf7_recaptcha = {"sitekey":"6LdhSkIoAAAAACICg2q1m7CCmCRAdluGCeHdsgCZ","actions":{"homepage":"homepage","contactform":"contactform"}};
-</script>
-<script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-content/plugins/contact-form-7/modules/recaptcha/index.js' defer='defer' id='wpcf7-recaptcha-js'></script>
+
 <script type="rocketlazyloadscript" src='https://www.neosofttech.com/wp-includes/js/hoverIntent.min.js' defer='defer' id='hoverIntent-js'></script>
 <script id='megamenu-js-extra'>
 var megamenu = {"timeout":"300","interval":"100"};

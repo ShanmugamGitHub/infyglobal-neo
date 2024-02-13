@@ -65,7 +65,7 @@ nav {
 }
 
 .customerjorney .bgcrm {
-  background: url('../Assets/Images/solution_crm.jpg') no-repeat;
+  background: url('../Assets/Images/solution_crm.jpg') no-repeat !important; 
   background-size: cover
 }
 .red-background {
@@ -133,4 +133,27 @@ nav {
   background: url('../Assets/Images/red-transparent-half-circle.png') no-repeat !important;
   background-size: cover;
   background-position: bottom
+}
+
+
+.search-content .h2, .search-content h2 {
+  color: #fff;
+  text-align: left;
+  font-size: 3.5rem !important;
+  margin-bottom: 0rem !important;
+}
+
+.search_explore .container {
+  margin-top: 3rem !important;
+}
+
+.parallax-container_item-inner{
+  background-image: url('../Assets/Images/iot_background.jpg');
+}
+
+.parallax-container_item_overlay::before {
+  content: "";
+  background: url('../Assets/Images/iot-red-bg.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
