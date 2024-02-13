@@ -1,0 +1,136 @@
+@font-face {
+  font-family: "Gilroy-Medium";
+  src: url("../font/Gilroy\ Font/Gilroy-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Gilroy-ExtraBold";
+  src: url("../font/Gilroy\ Font/Gilroy-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Gilroy-Bold";
+  src: url("../font/Gilroy\ Font/Gilroy-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Gilroy-Regular";
+  src: url("../font/Gilroy\ Font/Gilroy-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Gilroy-Black";
+  src: url("../font/Gilroy\ Font/Gilroy-Black.ttf");
+}
+
+@font-face {
+  font-family: "Gilroy-SemiBold";
+  src: url("../font/Gilroy\ Font/Gilroy-SemiBold.ttf");
+}
+
+
+nav {
+  height: 7rem !important;
+}
+
+.outsource-banner-sec .header-logo {
+  width: 8rem !important;
+  z-index: 5;
+  position: relative
+}
+
+
+@media (max-width:991px) {
+  .header-logo {
+    width: 8rem  !important
+  }
+}
+
+.header-logo {
+  width: 8rem !important
+}
+
+.blocks-team-container {
+  background: url('../Assets/Images/block-team.jpg') no-repeat !important;
+  background-size: cover;
+  background-position: center
+}
+
+.team-static-banner {
+  background: url('../Assets/Images/footer-team.jpg') !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 50rem;
+  background-attachment: fixed
+}
+
+.customerjorney .bgcrm {
+  background: url('../Assets/Images/solution_crm.jpg') no-repeat;
+  background-size: cover
+}
+.red-background {
+  background: url('../Assets/Images/red-bg.svg') no-repeat;
+  background-size: cover
+}
+.customerjorney .bgsap {
+  background: url('../Assets/Images/web-4.webp') no-repeat;
+  background-size: cover
+}
+.contactform {
+  background-image: url('../Assets/Images/contact-us-n.png');
+  background-repeat: no-repeat;
+  background-size: cover
+}
+
+
+
+.customerjorney .bgecommerce {
+  background: url('../Assets/Images/solution_ecommerce.png') no-repeat;
+  background-size: cover
+}
+
+
+.customerjorney .bgeerp {
+  background: url('../Assets/Images/solution_erp.png') no-repeat;
+  background-size: cover
+}
+
+.red-background {
+  background: url('../Assets/Images/red-bg.svg') no-repeat;
+  background-size: cover
+}
+
+
+.customerjorney .bgrpa {
+  background: url('../Assets/Images/solution_rpa.png') no-repeat;
+  background-size: cover
+}
+
+.customerjorney .bgcms {
+  background: url('./Assets/Images/solution_rpa.png') no-repeat !important;
+  background-size: cover
+}
+
+.blocks5-division-container {
+  background: url('../Assets/Images/ui-5block.jpg') no-repeat;
+  background-size: cover;
+  height: 60rem
+}
+
+.blocks5-division-container .blocks5-division-container {
+  background: url('../Assets/Images/ui-5block.jpg') no-repeat;
+  background-size: cover;
+  height: 100vh
+}
+
+.looking-for-container::before {
+  content: "";
+  width: 28%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url('../Assets/Images/red-transparent-half-circle.png') no-repeat !important;
+  background-size: cover;
+  background-position: bottom
+}
